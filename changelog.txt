@@ -1,4 +1,4 @@
-v 0.1.0 (20120515)
+v 0.1.1 (20120517)
 - First build
 - Remote control to control the GUI (basic input functions, playback and volume)
 - Accessing the movie, TV show and music libraries
