@@ -503,8 +503,9 @@ function showMusicMain() {
 			
 			$.each($(data.result.artists), jQuery.proxy(function(i, item) {
 				startsWith = item.label.indexOf("The ") == 0 ? item.label.substr(4, 1) : item.label.indexOf("De ") == 0 ? item.label.substr(3, 1) : item.label.substr(0, 1);
+				startsWith = startsWith.toUpperCase();
 				
-				if(64 < startsWith.toUpperCase().charCodeAt(0) && startsWith.toUpperCase().charCodeAt(0) < 91) {
+				if(64 < startsWith.charCodeAt(0) && startsWith.charCodeAt(0) < 91) {
 					if(startsWith != dividing) {
 						$('#musicmainlist')
 							.append('<li><a href="#" onclick="showArtists(\'' + startsWith + '\');"> ' + startsWith + '<p class="ui-li-count" data-artiststartswith="' + startsWith + '">1</p></a></li>')
@@ -545,8 +546,9 @@ function showArtists(s) {
 			
 			$.each($(data.result.artists), jQuery.proxy(function(i, item) {
 				startsWith = item.label.indexOf("The ") == 0 ? item.label.substr(4, 1) : item.label.indexOf("De ") == 0 ? item.label.substr(3, 1) : item.label.substr(0, 1);
+				startsWith = startsWith.toUpperCase();
 				
-				if(s == '#' && (65 > startsWith.toUpperCase().charCodeAt(0) || startsWith.toUpperCase().charCodeAt(0) > 91)) {console.log('--> # : ' + item.label);
+				if(s == '#' && (65 > startsWith.charCodeAt(0) || startsWith.charCodeAt(0) > 91)) {
 					$('#artistlist')
 						.append('<li><a href="javascript:void(0);" onclick="showSongs(' + item.artistid + ');">' + item.label + '</li>')
 						.trigger('create');
