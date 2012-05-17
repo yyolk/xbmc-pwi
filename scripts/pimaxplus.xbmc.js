@@ -115,43 +115,13 @@ function toggleMute() {
 	});
 }
 
-// function changeVolume(way) {
-	// jQuery.ajax({
-		// type: 'POST',
-		// contentType: 'application/json',
-		// url: JSON_RPC + '?SendRemoteKey',
-		// data: '{"jsonrpc": "2.0", "method": "Application.GetProperties", "params": { "properties": [ "volume" ] }, "id": 1}',
-		// success: jQuery.proxy(function(data) {
-			// if(way == "up") {
-				// var volume = data.result.volume + 1;
-			// } else {
-				// var volume = data.result.volume - 1;
-			// }	
-			
-			// jQuery.ajax({
-			// type: 'POST',
-			// contentType: 'application/json',
-			// url: JSON_RPC + '?SendRemoteKey',
-			// data: '{"jsonrpc": "2.0", "method": "Application.SetVolume", "params": { "volume": ' + volume + ' }, "id": 1}',
-			// success: jQuery.proxy(function(data) {}, this),
-			// dataType: 'json'});
-		// }, this),
-		// dataType: 'json'});
-// }
-
 function changeVolume(volume) {
 	jQuery.ajax({
 		type: 'POST',
 		contentType: 'application/json',
 		url: JSON_RPC + '?SendRemoteKey',
 		data: '{"jsonrpc": "2.0", "method": "Application.GetProperties", "params": { "properties": [ "volume" ] }, "id": 1}',
-		success: jQuery.proxy(function(data) {
-			// if(way == "up") {
-				// var volume = data.result.volume + 1;
-			// } else {
-				// var volume = data.result.volume - 1;
-			// }	
-			
+		success: jQuery.proxy(function(data) {			
 			jQuery.ajax({
 			type: 'POST',
 			contentType: 'application/json',
@@ -534,7 +504,7 @@ function showMusicMain() {
 			$.each($(data.result.artists), jQuery.proxy(function(i, item) {
 				startsWith = item.label.indexOf("The ") == 0 ? item.label.substr(4, 1) : item.label.indexOf("De ") == 0 ? item.label.substr(3, 1) : item.label.substr(0, 1);
 				
-				if(64 < startsWith.charCodeAt(0) && startsWith.charCodeAt(0) < 91) {
+				if(64 < startsWith.toUpperCase().charCodeAt(0) && startsWith.toUpperCase().charCodeAt(0) < 91) {
 					if(startsWith != dividing) {
 						$('#musicmainlist')
 							.append('<li><a href="#" onclick="showArtists(\'' + startsWith + '\');"> ' + startsWith + '<p class="ui-li-count" data-artiststartswith="' + startsWith + '">1</p></a></li>')
@@ -576,7 +546,7 @@ function showArtists(s) {
 			$.each($(data.result.artists), jQuery.proxy(function(i, item) {
 				startsWith = item.label.indexOf("The ") == 0 ? item.label.substr(4, 1) : item.label.indexOf("De ") == 0 ? item.label.substr(3, 1) : item.label.substr(0, 1);
 				
-				if(s == '#' && (65 > startsWith.charCodeAt(0) || startsWith.charCodeAt(0) > 91)) {
+				if(s == '#' && (65 > startsWith.toUpperCase().charCodeAt(0) || startsWith.toUpperCase().charCodeAt(0) > 91)) {console.log('--> # : ' + item.label);
 					$('#artistlist')
 						.append('<li><a href="javascript:void(0);" onclick="showSongs(' + item.artistid + ');">' + item.label + '</li>')
 						.trigger('create');
